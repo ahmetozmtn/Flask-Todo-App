@@ -70,8 +70,8 @@ class Todo(db.Model):
     complete: Mapped[bool] = mapped_column(Boolean, default=False)
 
 
-# with app.app_context():
-#     db.create_all()
+with app.app_context():
+    db.create_all()
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host=0.0.0.0)
