@@ -63,7 +63,9 @@
                     {% for todo in todos %}
                     <tr>
                         <th scope="row">{{todo.id}}</th>
-                        <td>{{todo.title}}</td>
+                        <td>
+                            <a href="/detail/{{todo.id}}">{{todo.title}}</a>
+                        </td>
                         <td>{{todo.content}}</td>
                         {% if todo.complete == False %}
                         <td>Tamamlanmadı</td>
