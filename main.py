@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy import Integer, String, Text, Boolean
+from sqlalchemy import Integer, String, Text, Boolean, update
 from sqlalchemy.orm import Mapped, mapped_column
 
 
@@ -34,6 +34,17 @@ def addTodo():
 
     newTodo = Todo(title=title, content=content, complete=False)
     db.session.add(newTodo)
+    db.session.commit()
+    return redirect(url_for("index"))
+
+
+@app.route("/complete/<string:id>")
+def completeTodo(id):
+    todo = Todo.query.filter_by(id=id).first()
+    if todo.complete == False:
+        todo.complete = True
+    else:
+        todo.complete = False
     db.session.commit()
     return redirect(url_for("index"))
 
