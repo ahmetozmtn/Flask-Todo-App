@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy import Integer, String, Text, Boolean
@@ -25,15 +25,26 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/add", methods=["POST"])
+def addTodo():
+    title = request.form.get("title")
+    content = request.form.get("content")
+
+    newTodo = Todo(title=title, content=content, complete=False)
+    db.session.add(newTodo)
+    db.session.commit()
+    return redirect(url_for("index"))
+
+
 class Todo(db.Model):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     title: Mapped[str] = mapped_column(String, nullable=False)
     content: Mapped[str] = mapped_column(Text)
-    complated: Mapped[bool] = mapped_column(Boolean, default=False)
+    complete: Mapped[bool] = mapped_column(Boolean, default=False)
 
 
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.create_all()
 
 if __name__ == "__main__":
     app.run(debug=True)
