@@ -53,7 +53,16 @@
                         <th scope="col">Sil</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    {% for todo in todos %}
+                    <tr>
+                        <th scope="row">{{todo.id}}</th>
+                        <td>{{todo.title}}</td>
+                        <td>{{todo.content}}</td>
+                        <td>{{todo.complete}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         </div>
 
