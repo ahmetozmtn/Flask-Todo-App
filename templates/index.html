@@ -4,97 +4,158 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Todo List</title>
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body>
-        <div style="margin-top: 100px" class="container">
-            <h3>Todo List</h3>
-            <hr />
-
-            <form action="/add" method="post">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Başlık</label>
-                    <input
-                        type="text"
-                        name="title"
-                        class="form-control"
-                        id="title"
-                        aria-describedby="emailHelp"
-                        placeholder="Başık"
-                    />
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">İçerik</label>
-                    <textarea
-                        type="text"
-                        name="content"
-                        class="form-control"
-                        id="content"
-                        placeholder="İçerik"
-                    ></textarea>
-                </div>
+    <body style="background-color: #111827">
+        <div style="margin-top: 80px" class="flex justify-center items-center">
+            <div class="relative overflow-x-auto">
+                <p class="text-5xl text-gray-900 dark:text-white">Todo List</p>
                 <br />
-                <button type="submit" class="btn btn-primary">Ekle</button>
-            </form>
-            <br />
+                <hr />
+                <br />
 
-            {% if todos == [] %}
-            <div class="alert alert-warning" role="alert">
-                Her hangi bir todonuz bulunmuyor...
-            </div>
-            {% else %}
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">id</th>
-                        <th scope="col">Başlık</th>
-                        <th scope="col">İçerik</th>
-                        <th scope="col">Durum</th>
-                        <th scope="col">Güncelle</th>
-                        <th scope="col">Sil</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for todo in todos %}
-                    <tr>
-                        <th scope="row">{{todo.id}}</th>
-                        <td>
-                            <a href="/detail/{{todo.id}}">{{todo.title}}</a>
-                        </td>
-                        <td>{{todo.content}}</td>
-                        {% if todo.complete == False %}
-                        <td>Tamamlanmadı</td>
+                <form action="/add" method="post">
+                    <div>
+                        <label
+                            for="small-input"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >Başlık</label
+                        >
+                        <input
+                            name="title"
+                            type="text"
+                            id="small-input"
+                            class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        />
+                    </div>
+
+                    <br />
+
+                    <div class="mb-6">
+                        <label
+                            for="large-input"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >İçerik</label
+                        >
+                        <input
+                            name="content"
+                            type="text"
+                            id="large-input"
+                            class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        />
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                    >
+                        Ekle
+                    </button>
+                </form>
+                <br />
+                <br />
+                <table
+                    style="margin-bottom: 20px"
+                    class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+                >
+                    <thead
+                        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+                    >
+                        {% if todos == [] %}
+                        <div
+                            class="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+                            role="alert"
+                        >
+                            <svg
+                                class="flex-shrink-0 inline w-4 h-4 mr-3"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+                                />
+                            </svg>
+                            <span class="sr-only">Info</span>
+                            <div>
+                                <span class="font-medium">Uyarı!</span>
+                                Herhangi bir göreviniz bulunmuyor.
+                            </div>
+                        </div>
                         {% else %}
-                        <td>Tamamlandı</td>
+                        <tr>
+                            <th scope="col" class="px-6 py-3">id</th>
+                            <th scope="col" class="px-6 py-3">Başlık</th>
+                            <th scope="col" class="px-6 py-3">İçerik</th>
+                            <th scope="col" class="px-6 py-3">Durum</th>
+                            <th scope="col" class="px-7 py-3">Güncelle</th>
+                            <th scope="col" class="px-7 py-3">Sil</th>
+                        </tr>
                         {% endif %}
-                        <td>
-                            <a
-                                href="/complete/{{todo.id}}"
-                                class="btn btn-danger"
-                                >Tamamla</a
+                    </thead>
+                    <tbody>
+                        <!-- Loop through todos and create a row for each todo -->
+                        {% for todo in todos %}
+                        <tr
+                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                        >
+                            <td
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                             >
-                        </td>
-                        <td>
-                            <a href="/delete/{{todo.id}}" class="btn btn-danger"
-                                >Sil</a
-                            >
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            {% endif %}
+                                {{todo.id}}
+                            </td>
+                            <td class="px-6 py-4">
+                                <a href="/detail/{{todo.id}}">{{todo.title}}</a>
+                            </td>
+                            <td class="px-6 py-4">{{todo.content}}</td>
+                            <!-- <td class="px-6 py-4">{{todo.complete}}</td> -->
+                            {% if todo.complete == False %}
+                            <td class="px-6">
+                                <img
+                                    width="48"
+                                    height="48"
+                                    src="https://cdn0.iconfinder.com/data/icons/evericons-16px/16/x-256.png"
+                                    alt="close-window"
+                                />
+                            </td>
+                            {% else %}
+                            <td class="px-6">
+                                <img
+                                    width="48"
+                                    height="48"
+                                    src="https://img.icons8.com/emoji/48/check-mark-emoji.png"
+                                    alt="check-mark-emoji"
+                                />
+                            </td>
+                            {% endif %}
+                            <td class="px-6 py-4">
+                                <!-- <button
+                                    type="button"
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                                >
+                                    <a href="/complete/{{todo.id}}">Güncelle</a>
+                                </button> -->
+                                <button
+                                    type="button"
+                                    class="inline-block px-6 py-3 mr-3 font-bold text-center uppercase align-middle transition-all bg-transparent border rounded-lg cursor-pointer border-gray-50 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85 hover:shadow-soft-xs text-gray-50"
+                                >
+                                    <a href="/complete/{{todo.id}}">Güncelle</a>
+                                </button>
+                            </td>
+                            <td class="px-6 py-4">
+                                <button
+                                    type="button"
+                                    class="inline-block px-6 py-3 mr-3 font-bold text-center uppercase align-middle transition-all bg-transparent border rounded-lg cursor-pointer border-gray-50 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85 hover:shadow-soft-xs text-gray-50"
+                                >
+                                    <a href="/delete/{{todo.id}}">Sil</a>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous"
-        ></script>
     </body>
 </html>

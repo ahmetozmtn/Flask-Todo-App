@@ -3,34 +3,48 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Detay Sayfası</title>
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
+        <title>Toda Detail</title>
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body>
-        <div style="margin-top: 100px" class="container">
-            <h3>Ayrıntılr</h3>
-            <hr />
-            <h4>{{todo.title}}</h4>
-            <hr />
-            <p>{{todo.content}}</p>
-            <hr />
-            {% if todo.complete == False %}
-            <p>Durum: Tamamlanmadı</p>
+    <body style="background-color: #111827">
+        <div style="margin-top: 80px" class="flex justify-center items-center">
+            <a
+                href="#"
+                class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+            >
+                <h5
+                    class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                >
+                    Ayrıntılar
+                </h5>
+                <br />
+                <h5
+                    class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white"
+                >
+                    Başlık : {{todo.title}}
+                </h5>
+                <br />
+                <h5
+                    class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white"
+                >
+                    İçerik: {{todo.content}}
+                </h5>
+                <br />
+                <h5
+                    class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white"
+                >
+                    {% if todo.complete == False %}
+                    <p>Durum: Tamamlanmadı</p>
 
-            {% else %}
-            <p>Durum: Tamamlandı</p>
-            {% endif %}
+                    {% else %}
+                    <p>Durum: Tamamlandı</p>
+                    {% endif %}
+                </h5>
+                <!-- <p class="font-normal text-gray-700 dark:text-gray-400">
+                    Here are the biggest enterprise technology acquisitions of
+                    2021 so far, in reverse chronological order.
+                </p> -->
+            </a>
         </div>
-
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous"
-        ></script>
     </body>
 </html>

@@ -11,6 +11,7 @@ class Base(DeclarativeBase):
 
 db = SQLAlchemy(model_class=Base)
 
+
 # create the app
 app = Flask(__name__)
 # db = SQLAlchemy(app)
@@ -23,7 +24,6 @@ db.init_app(app)
 @app.route("/")
 def index():
     todos = Todo.query.all()
-
     return render_template("index.html", todos=todos)
 
 
@@ -63,15 +63,39 @@ def detailTodo(id):
     return render_template("detail.html", todo=todo)
 
 
+# @app.route("/register")
+# def register():
+#     return render_template("register.html")
+
+
+# @app.route("/registration", methods=["POST"])
+# def registration():
+#     username = request.form.get("username")
+#     password = request.form.get("password")
+
+#     newUser = Users(username=username, password=password)
+#     db.session.add(newUser)
+#     db.session.commit()
+#     return redirect(url_for("index"))
+
+
 class Todo(db.Model):
+    # __tablename__ = 'todo'
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     title: Mapped[str] = mapped_column(String, nullable=False)
     content: Mapped[str] = mapped_column(Text)
     complete: Mapped[bool] = mapped_column(Boolean, default=False)
 
 
-# with app.app_context():
-#     db.create_all()
+# class Users(db.Model):
+#     __tablename__ = 'users'
+#     id: Mapped[int] = mapped_column(Integer, primary_key=True)
+#     username: Mapped[str] = mapped_column(String, nullable=False)
+#     password: Mapped[str] = mapped_column(String, nullable=False)
+
+
+with app.app_context():
+    db.create_all()
 
 if __name__ == "__main__":
     app.run(debug=True)

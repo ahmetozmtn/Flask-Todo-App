@@ -4,6 +4,14 @@
 
 <br>
 
+![img](/src/img/img-1.png)
+
+<br>
+
+![img](/src/img/img-2.png)
+
+<br>
+
 ## Kurulum
 
 ### Clone
